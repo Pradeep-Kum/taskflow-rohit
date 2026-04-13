@@ -1,16 +1,16 @@
 package com.taskflow.auth.service.usecases
 
-import com.taskflow.domain.usecases.RegisterUser
-import com.taskflow.service.entities.AuthResponse
-import com.taskflow.service.entities.RegisterRequest
-import com.taskflow.service.mappers.toDomainRegisterRequest
-import com.taskflow.service.mappers.toServiceResponse
+import com.taskflow.auth.domain.usecases.RegisterUser
+import com.taskflow.auth.service.entities.AuthResponse
+import com.taskflow.auth.service.entities.RegisterRequest
+import com.taskflow.auth.service.mappers.toDomainRegisterRequest
+import com.taskflow.auth.service.mappers.toServiceResponse
 import org.slf4j.LoggerFactory
 
 class RegisterService(
     private val registerUser: RegisterUser
 ) {
-    private val logger = LoggerFactory.getLogger(_root_ide_package_.com.taskflow.auth.service.usecases.RegisterService::class.java)
+    private val logger = LoggerFactory.getLogger(RegisterService::class.java)
 
     fun register(request: RegisterRequest): AuthResponse {
         return try {

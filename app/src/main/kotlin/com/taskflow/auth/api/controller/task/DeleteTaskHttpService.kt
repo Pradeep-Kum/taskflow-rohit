@@ -1,5 +1,6 @@
 package com.taskflow.auth.api.controller.task
 
+import com.taskflow.api.controller.project.requireUserId
 import com.taskflow.tasks.service.usecases.DeleteTaskService
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -10,28 +11,35 @@ import java.util.*
 class DeleteTaskHttpService(
     private val deleteTaskService: DeleteTaskService
 ) {
-    private val logger = LoggerFactory.getLogger(_root_ide_package_.com.taskflow.auth.api.controller.task.DeleteTaskHttpService::class.java)
+    private val logger = LoggerFactory.getLogger(DeleteTaskHttpService::class.java)
 
     suspend fun handleDeleteTask(call: ApplicationCall) {
-        val taskIdStr = call.parameters["id"]
+        val taskIdStr = call.parameters["taskId"]
 
         try {
             if (taskIdStr == null) {
-                call.respond(HttpStatusCode.BadRequest, "task ID is required")
+                call.respond(HttpStatusCode.BadRequest, mapOf("error" to "Task ID is required"))
                 return
             }
             val taskId = UUID.fromString(taskIdStr)
+            val userId = call.requireUserId()
 
-            val tasks = deleteTaskService.deleteTask(taskId)
+            deleteTaskService.deleteTask(taskId, userId)
 
-            call.respond(HttpStatusCode.OK, tasks)
+            call.respond(HttpStatusCode.NoContent)
 
         } catch (e: IllegalArgumentException) {
             logger.warn("Invalid UUID format provided: $taskIdStr")
-            call.respond(HttpStatusCode.BadRequest, "Invalid ID format")
+            call.respond(HttpStatusCode.BadRequest, mapOf("error" to "Invalid ID format"))
+        } catch (e: NoSuchElementException) {
+            logger.warn("Task not found: $taskIdStr")
+            call.respond(HttpStatusCode.NotFound, mapOf("error" to "not found"))
+        } catch (e: SecurityException) {
+            logger.warn("User is not allowed to delete task $taskIdStr")
+            call.respond(HttpStatusCode.Forbidden, mapOf("error" to "forbidden"))
         } catch (e: Exception) {
             logger.error("Failed to fetch tasks for task $taskIdStr", e)
-            call.respond(HttpStatusCode.InternalServerError, "Internal Server Error")
+            call.respond(HttpStatusCode.InternalServerError, mapOf("error" to "An unexpected error occurred"))
         }
     }
 }

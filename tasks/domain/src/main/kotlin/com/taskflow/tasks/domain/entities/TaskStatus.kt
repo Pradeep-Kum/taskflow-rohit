@@ -1,7 +1,7 @@
 package com.taskflow.tasks.domain.entities
 
 enum class TaskStatus {
-    TO_DO,
+    TODO,
     IN_PROGRESS,
     DONE
 }

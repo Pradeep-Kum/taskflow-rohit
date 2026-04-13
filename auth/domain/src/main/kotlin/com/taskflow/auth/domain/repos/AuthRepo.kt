@@ -1,6 +1,6 @@
 package com.taskflow.auth.domain.repos
 
-import com.taskflow.domain.entities.User
+import com.taskflow.auth.domain.entities.User
 import java.util.*
 
 interface AuthRepo {

@@ -1,11 +1,11 @@
 package com.taskflow.auth.domain.usecases
 
-import com.taskflow.domain.entities.AuthResponse
-import com.taskflow.domain.entities.RegisterRequest
-import com.taskflow.domain.entities.UserProfile
-import com.taskflow.domain.interfaces.PasswordHasher
-import com.taskflow.domain.interfaces.TokenService
-import com.taskflow.domain.repos.AuthRepo
+import com.taskflow.auth.domain.entities.AuthResponse
+import com.taskflow.auth.domain.entities.RegisterRequest
+import com.taskflow.auth.domain.entities.UserProfile
+import com.taskflow.auth.domain.interfaces.PasswordHasher
+import com.taskflow.auth.domain.interfaces.TokenService
+import com.taskflow.auth.domain.repos.AuthRepo
 import java.util.UUID
 
 class RegisterUser(
@@ -18,7 +18,7 @@ class RegisterUser(
         val newUser = userRepo.createUser(UUID.randomUUID(), request.name, request.email, hash)
             ?: throw IllegalStateException("Failed to create user")
 
-        val token = tokenService.generate(newUser.id)
+        val token = tokenService.generate(newUser.id, newUser.email)
 
         return AuthResponse(token, UserProfile(newUser.id, newUser.name, newUser.email))
     }

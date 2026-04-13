@@ -1,9 +1,9 @@
 package com.taskflow.tasks.domain.usecases
 
-import com.taskflow.domain.entities.Task
-import com.taskflow.domain.entities.UpdateTaskDraft
-import com.taskflow.domain.entities.UpdateTaskRequest
-import com.taskflow.domain.repos.TaskRepo
+import com.taskflow.tasks.domain.entities.Task
+import com.taskflow.tasks.domain.entities.UpdateTaskDraft
+import com.taskflow.tasks.domain.entities.UpdateTaskRequest
+import com.taskflow.tasks.domain.repos.TaskRepo
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.ZoneOffset

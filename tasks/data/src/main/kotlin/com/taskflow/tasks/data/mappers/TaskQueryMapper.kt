@@ -1,9 +1,9 @@
 package com.taskflow.tasks.data.mappers
 
-import com.taskflow.domain.entities.Task
-import com.taskflow.domain.entities.TaskPriority
-import com.taskflow.domain.entities.TaskStatus
-import com.taskflow.tables.TaskTable
+import com.taskflow.tasks.data.tables.TaskTable
+import com.taskflow.tasks.domain.entities.Task
+import com.taskflow.tasks.domain.entities.TaskPriority
+import com.taskflow.tasks.domain.entities.TaskStatus
 import org.jetbrains.exposed.sql.ResultRow
 
 class TaskQueryMapper {

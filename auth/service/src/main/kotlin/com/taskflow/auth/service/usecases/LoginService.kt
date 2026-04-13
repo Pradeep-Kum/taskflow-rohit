@@ -1,17 +1,17 @@
 package com.taskflow.auth.service.usecases
 
-import com.taskflow.service.entities.LoginRequest
-import com.taskflow.domain.usecases.LoginUser
-import com.taskflow.service.entities.AuthResponse
-import com.taskflow.service.mappers.toDomainLoginRequest
-import com.taskflow.service.mappers.toServiceResponse
+import com.taskflow.auth.domain.usecases.LoginUser
+import com.taskflow.auth.service.entities.AuthResponse
+import com.taskflow.auth.service.entities.LoginRequest
+import com.taskflow.auth.service.mappers.toDomainLoginRequest
+import com.taskflow.auth.service.mappers.toServiceResponse
 import org.slf4j.LoggerFactory
 
 
 class LoginService(
     private val loginUser: LoginUser
 ) {
-    private val logger = LoggerFactory.getLogger(_root_ide_package_.com.taskflow.auth.service.usecases.LoginService::class.java)
+    private val logger = LoggerFactory.getLogger(LoginService::class.java)
 
     fun login(request: LoginRequest): AuthResponse {
         return try {

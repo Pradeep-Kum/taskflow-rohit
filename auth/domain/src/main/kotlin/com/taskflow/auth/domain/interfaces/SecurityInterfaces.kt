@@ -8,6 +8,6 @@ interface PasswordHasher {
 }
 
 interface TokenService {
-    fun generate(userId: UUID): String
+    fun generate(userId: UUID, email: String): String
     fun verify(token: String): UUID?
 }

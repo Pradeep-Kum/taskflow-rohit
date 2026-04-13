@@ -1,8 +1,8 @@
 package com.taskflow.auth.data.queries
 
-import com.taskflow.domain.entities.User
-import com.taskflow.mappers.AuthQueryMapper
-import com.taskflow.tables.UserTable
+import com.taskflow.auth.data.mappers.AuthQueryMapper
+import com.taskflow.auth.data.tables.UserTable
+import com.taskflow.auth.domain.entities.User
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.OffsetDateTime

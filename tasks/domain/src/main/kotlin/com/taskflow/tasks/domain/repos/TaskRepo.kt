@@ -1,9 +1,9 @@
 package com.taskflow.tasks.domain.repos
 
-import com.taskflow.domain.entities.Task
-import com.taskflow.domain.entities.CreateTaskDraft
-import com.taskflow.domain.entities.TaskStatus
-import com.taskflow.domain.entities.UpdateTaskDraft
+import com.taskflow.tasks.domain.entities.CreateTaskDraft
+import com.taskflow.tasks.domain.entities.Task
+import com.taskflow.tasks.domain.entities.TaskStatus
+import com.taskflow.tasks.domain.entities.UpdateTaskDraft
 import java.util.UUID
 
 interface TaskRepo {
@@ -13,5 +13,5 @@ interface TaskRepo {
 
     fun updateTask(taskId: UUID, draft: UpdateTaskDraft): Task?
 
-    fun deleteTask(taskId: UUID)
+    fun deleteTask(taskId: UUID, userId: UUID): Boolean?
 }

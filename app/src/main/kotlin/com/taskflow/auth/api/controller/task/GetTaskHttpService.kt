@@ -18,7 +18,7 @@ class GetTaskHttpService(
         try {
             if (projectIdStr == null) {
                 call.respond(HttpStatusCode.BadRequest, "Project ID is required")
-                return
+            return
             }
             val projectId = UUID.fromString(projectIdStr)
 
@@ -33,10 +33,10 @@ class GetTaskHttpService(
 
         } catch (e: IllegalArgumentException) {
             logger.warn("Invalid UUID format provided: $projectIdStr")
-            call.respond(HttpStatusCode.BadRequest, "Invalid ID format")
+            call.respond(HttpStatusCode.BadRequest, mapOf("error" to "Invalid ID format"))
         } catch (e: Exception) {
             logger.error("Failed to fetch tasks for project $projectIdStr", e)
-            call.respond(HttpStatusCode.InternalServerError, "Internal Server Error")
+            call.respond(HttpStatusCode.InternalServerError, mapOf("error" to "An unexpected error occurred"))
         }
     }
 }

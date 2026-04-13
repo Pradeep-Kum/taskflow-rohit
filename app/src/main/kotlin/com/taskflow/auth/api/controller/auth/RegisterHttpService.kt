@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory
 class RegisterHttpService(
     private val registerService: RegisterService
 ) {
-    private val logger = LoggerFactory.getLogger(_root_ide_package_.com.taskflow.auth.api.controller.auth.RegisterHttpService::class.java)
+    private val logger = LoggerFactory.getLogger(RegisterHttpService::class.java)
 
     suspend fun handleRegister(call: ApplicationCall) {
         try {

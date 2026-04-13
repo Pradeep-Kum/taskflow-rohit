@@ -1,10 +1,10 @@
 package com.taskflow.tasks.service.usecases
 
-import com.taskflow.domain.entities.TaskStatus
+import com.taskflow.tasks.domain.entities.TaskStatus
+import com.taskflow.tasks.domain.usecases.GetTask
+import com.taskflow.tasks.service.entities.Task
+import com.taskflow.tasks.service.mappers.toService
 import org.slf4j.LoggerFactory
-import com.taskflow.service.entities.Task
-import com.taskflow.domain.usecases.GetTask
-import com.taskflow.service.mappers.toService
 import java.util.UUID
 
 class GetTaskService(
@@ -16,9 +16,7 @@ class GetTaskService(
         return try {
             logger.info("Fetching tasks for project: $projectId")
 
-            val status = status?.let {
-                TaskStatus.valueOf(it.uppercase())
-            } ?: throw IllegalArgumentException("Status is required")
+            val status = status?.let { TaskStatus.valueOf(it.uppercase()) }
 
             val domainTasks = getTask.getTasksByProjectId(projectId, status, assigneeId)
 

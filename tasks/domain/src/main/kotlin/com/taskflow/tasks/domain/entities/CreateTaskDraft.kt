@@ -10,5 +10,6 @@ data class CreateTaskDraft(
     val priority: TaskPriority,
     val projectId: UUID,
     val assigneeId: UUID?,
+    val createdById: UUID,
     val dueDate: OffsetDateTime?
 )

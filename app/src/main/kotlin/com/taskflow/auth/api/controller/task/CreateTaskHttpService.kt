@@ -1,5 +1,6 @@
 package com.taskflow.auth.api.controller.task
 
+import com.taskflow.api.controller.project.requireUserId
 import com.taskflow.tasks.service.entities.CreateTaskRequest
 import com.taskflow.tasks.service.usecases.CreateTaskService
 import io.ktor.http.HttpStatusCode
@@ -20,14 +21,15 @@ class CreateTaskHttpService(
 
         try {
             if (projectIdStr == null) {
-                call.respond(HttpStatusCode.BadRequest, "Project ID is required")
+                call.respond(HttpStatusCode.BadRequest, mapOf("error" to "Project ID is required"))
                 return
             }
             val projectId = UUID.fromString(projectIdStr)
+            val userId = call.requireUserId()
 
             val request = call.receive<CreateTaskRequest>()
 
-            val createdTask = createTaskService.createTask(projectId, request)
+            val createdTask = createTaskService.createTask(projectId, userId, request)
 
             call.respond(HttpStatusCode.Created, createdTask)
 

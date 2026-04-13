@@ -16,11 +16,11 @@ class UpdateTaskHttpService(
     private val logger = LoggerFactory.getLogger(GetTaskHttpService::class.java)
 
     suspend fun handleUpdateTask(call: ApplicationCall) {
-        val taskIdStr = call.parameters["id"]
+        val taskIdStr = call.parameters["taskId"]
 
         try {
             if (taskIdStr == null) {
-                call.respond(HttpStatusCode.BadRequest, "Project ID is required")
+                call.respond(HttpStatusCode.BadRequest, mapOf("error" to "Task ID is required"))
                 return
             }
             val taskId = UUID.fromString(taskIdStr)
@@ -37,6 +37,9 @@ class UpdateTaskHttpService(
         } catch (e: SerializationException) {
             logger.warn("Malformed JSON body for project ID : ${e.message}")
             call.respond(HttpStatusCode.BadRequest, mapOf("error" to "Malformed JSON body"))
+        } catch (e: NoSuchElementException) {
+            logger.warn("Task not found: $taskIdStr")
+            call.respond(HttpStatusCode.NotFound, mapOf("error" to "not found"))
         } catch (e: Exception) {
             logger.error("Failed to update task for project $taskIdStr", e)
             call.respond(HttpStatusCode.InternalServerError, mapOf("error" to "An unexpected error occurred"))

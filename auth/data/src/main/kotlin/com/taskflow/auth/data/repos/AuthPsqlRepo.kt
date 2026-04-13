@@ -1,8 +1,8 @@
 package com.taskflow.auth.data.repos
 
-import com.taskflow.domain.entities.User
-import com.taskflow.domain.repos.AuthRepo
-import com.taskflow.queries.AuthQueries
+import com.taskflow.auth.data.queries.AuthQueries
+import com.taskflow.auth.domain.entities.User
+import com.taskflow.auth.domain.repos.AuthRepo
 import java.util.*
 
 class AuthPsqlRepo(

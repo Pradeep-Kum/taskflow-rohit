@@ -1,11 +1,5 @@
 plugins {
-    application
     kotlin("jvm") version "2.2.21"
-    id("io.ktor.plugin") version "3.0.0"
-}
-
-application {
-    mainClass.set("com.taskflow.MainRunnerKt")
 }
 
 group = "org.example"
@@ -16,11 +10,7 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":auth:domain"))
-
-    implementation("io.insert-koin:koin-ktor:4.0.0")
-    implementation("io.insert-koin:koin-logger-slf4j:4.0.0")
-
+    implementation(project(":auth-domain"))
 
     implementation("io.ktor:ktor-serialization-kotlinx-json:3.0.0")
 
@@ -29,8 +19,6 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-core:0.50.1")
     implementation("org.jetbrains.exposed:exposed-jdbc:0.50.1")
     implementation("org.flywaydb:flyway-database-postgresql:10.10.0")
-
-    implementation("io.insert-koin:koin-ktor:4.0.0")
 
     testImplementation(kotlin("test"))
 }

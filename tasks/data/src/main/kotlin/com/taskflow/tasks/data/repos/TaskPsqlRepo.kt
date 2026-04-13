@@ -1,11 +1,11 @@
 package com.taskflow.tasks.data.repos
 
-import com.taskflow.domain.entities.Task
-import com.taskflow.domain.entities.CreateTaskDraft
-import com.taskflow.domain.entities.TaskStatus
-import com.taskflow.domain.entities.UpdateTaskDraft
-import com.taskflow.domain.repos.TaskRepo
-import com.taskflow.queries.TaskQueries
+import com.taskflow.tasks.data.queries.TaskQueries
+import com.taskflow.tasks.domain.entities.CreateTaskDraft
+import com.taskflow.tasks.domain.entities.Task
+import com.taskflow.tasks.domain.entities.TaskStatus
+import com.taskflow.tasks.domain.entities.UpdateTaskDraft
+import com.taskflow.tasks.domain.repos.TaskRepo
 import java.util.*
 
 class TaskPsqlRepo(
@@ -23,7 +23,7 @@ class TaskPsqlRepo(
         return queries.updateTask(taskId, draft)
     }
 
-    override fun deleteTask(taskId: UUID) {
-        return queries.deleteTask(taskId)
+    override fun deleteTask(taskId: UUID, userId: UUID): Boolean? {
+        return queries.deleteTask(taskId, userId)
     }
 }

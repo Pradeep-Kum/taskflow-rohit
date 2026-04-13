@@ -1,8 +1,8 @@
 package com.taskflow.auth.data.mappers
 
-import com.taskflow.domain.entities.User
+import com.taskflow.auth.domain.entities.User
 import org.jetbrains.exposed.sql.ResultRow
-import com.taskflow.tables.UserTable
+import com.taskflow.auth.data.tables.UserTable
 
 class AuthQueryMapper {
     fun toUser(row: ResultRow): User = User(

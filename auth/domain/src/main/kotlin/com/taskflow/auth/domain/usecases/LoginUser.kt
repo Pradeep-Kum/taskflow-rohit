@@ -1,11 +1,11 @@
 package com.taskflow.auth.domain.usecases
 
-import com.taskflow.domain.entities.AuthResponse
-import com.taskflow.domain.entities.LoginRequest
-import com.taskflow.domain.entities.UserProfile
-import com.taskflow.domain.interfaces.PasswordHasher
-import com.taskflow.domain.interfaces.TokenService
-import com.taskflow.domain.repos.AuthRepo
+import com.taskflow.auth.domain.entities.AuthResponse
+import com.taskflow.auth.domain.entities.LoginRequest
+import com.taskflow.auth.domain.entities.UserProfile
+import com.taskflow.auth.domain.interfaces.PasswordHasher
+import com.taskflow.auth.domain.interfaces.TokenService
+import com.taskflow.auth.domain.repos.AuthRepo
 
 class LoginUser(
     private val userRepo: AuthRepo,
@@ -20,7 +20,7 @@ class LoginUser(
             throw NoSuchElementException("Invalid email or password")
         }
 
-        val token = tokenService.generate(user.id)
+        val token = tokenService.generate(user.id, user.email)
 
         return AuthResponse(token, UserProfile(user.id, user.name, user.email))
     }
