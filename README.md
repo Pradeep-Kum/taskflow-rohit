@@ -185,4 +185,3 @@ Deletes a task.
 - Add integration tests for auth, project ownership, and task filtering.
 - Add stricter request validation with consistent field-level error responses everywhere.
 - Add pagination to project and task list endpoints.
-- Add a frontend only if the role/submission requires full stack.
